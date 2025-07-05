@@ -1,293 +1,783 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!-- Hero Section -->
-<div class="hero-section">
-    <div class="container">
-        <div class="row align-items-center min-vh-100">
-            <div class="col-12">
-                <div class="text-center mb-5 animate__animated animate__fadeInUp">
-                    <h1 class="hero-title mb-3">
-                        <i class="fas fa-chart-line me-3 text-primary"></i>
-                        Data Management Dashboard
-                    </h1>
-                    <p class="hero-subtitle">Manage your profile, experience, certifications, and projects seamlessly</p>
-                </div>
-
-                <!-- Modern Card Grid -->
-                <div class="row g-4">
-                    <!-- Profile Card -->
-                    <div class="col-lg-6 col-xl-3">
-                        <div class="data-card h-100 animate__animated animate__fadeInUp animate__delay-1s" data-sheet="Profile">
-                            <div class="card-header-modern">
-                                <div class="card-icon profile-icon">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                                <h5 class="card-title-modern">Profile</h5>
-                                <p class="card-description">Personal information and contact details</p>
-                            </div>
-                            <div class="card-stats">
-                                <div class="stat-item">
-                                    <span class="stat-number" id="profileCount">-</span>
-                                    <span class="stat-label">Records</span>
-                                </div>
-                            </div>
-                            <div class="card-actions">
-                                <button class="btn btn-outline-light btn-sm" onclick="viewData('Profile')">
-                                    <i class="fas fa-eye me-1"></i>View
-                                </button>
-                                <button class="btn btn-light btn-sm" onclick="showEditModal('Profile')">
-                                    <i class="fas fa-edit me-1"></i>Edit
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Experience Card -->
-                    <div class="col-lg-6 col-xl-3">
-                        <div class="data-card h-100 animate__animated animate__fadeInUp animate__delay-2s" data-sheet="Experience">
-                            <div class="card-header-modern">
-                                <div class="card-icon experience-icon">
-                                    <i class="fas fa-briefcase"></i>
-                                </div>
-                                <h5 class="card-title-modern">Experience</h5>
-                                <p class="card-description">Work history and professional experience</p>
-                            </div>
-                            <div class="card-stats">
-                                <div class="stat-item">
-                                    <span class="stat-number" id="experienceCount">-</span>
-                                    <span class="stat-label">Records</span>
-                                </div>
-                            </div>
-                            <div class="card-actions">
-                                <button class="btn btn-outline-light btn-sm" onclick="viewData('Experience')">
-                                    <i class="fas fa-eye me-1"></i>View
-                                </button>
-                                <button class="btn btn-light btn-sm" onclick="showAddModal('Experience')">
-                                    <i class="fas fa-plus me-1"></i>Add
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Certifications Card -->
-                    <div class="col-lg-6 col-xl-3">
-                        <div class="data-card h-100 animate__animated animate__fadeInUp animate__delay-3s" data-sheet="Certifications">
-                            <div class="card-header-modern">
-                                <div class="card-icon certification-icon">
-                                    <i class="fas fa-certificate"></i>
-                                </div>
-                                <h5 class="card-title-modern">Certifications</h5>
-                                <p class="card-description">Professional certificates and achievements</p>
-                            </div>
-                            <div class="card-stats">
-                                <div class="stat-item">
-                                    <span class="stat-number" id="certificationsCount">-</span>
-                                    <span class="stat-label">Records</span>
-                                </div>
-                            </div>
-                            <div class="card-actions">
-                                <button class="btn btn-outline-light btn-sm" onclick="viewData('Certifications')">
-                                    <i class="fas fa-eye me-1"></i>View
-                                </button>
-                                <button class="btn btn-light btn-sm" onclick="showAddModal('Certifications')">
-                                    <i class="fas fa-plus me-1"></i>Add
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project Card -->
-                    <div class="col-lg-6 col-xl-3">
-                        <div class="data-card h-100 animate__animated animate__fadeInUp animate__delay-4s" data-sheet="Project">
-                            <div class="card-header-modern">
-                                <div class="card-icon project-icon">
-                                    <i class="fas fa-project-diagram"></i>
-                                </div>
-                                <h5 class="card-title-modern">Projects</h5>
-                                <p class="card-description">Portfolio projects and achievements</p>
-                            </div>
-                            <div class="card-stats">
-                                <div class="stat-item">
-                                    <span class="stat-number" id="projectCount">-</span>
-                                    <span class="stat-label">Records</span>
-                                </div>
-                            </div>
-                            <div class="card-actions">
-                                <button class="btn btn-outline-light btn-sm" onclick="viewData('Project')">
-                                    <i class="fas fa-eye me-1"></i>View
-                                </button>
-                                <button class="btn btn-light btn-sm" onclick="showAddModal('Project')">
-                                    <i class="fas fa-plus me-1"></i>Add
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!-- Hero Section with Enhanced Animations -->
+<section class="hero-section">
+  <div class="container">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        <span class="title-icon">
+          <i class="fas fa-rocket"></i>
+        </span>
+        <span class="title-text">DataHub Revolution</span>
+        <div class="title-underline"></div>
+      </h1>
+      <p class="hero-subtitle">
+        Experience the next generation of data management with our revolutionary glassmorphism design. 
+        Manage your professional profile, work experience, certifications, and portfolio projects 
+        with unprecedented style and efficiency.
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="stat-icon"><i class="fas fa-users"></i></div>
+          <div class="stat-value" id="heroTotalRecords">0</div>
+          <div class="stat-label">Total Records</div>
         </div>
+        <div class="hero-stat">
+          <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
+          <div class="stat-value">100%</div>
+          <div class="stat-label">Secure</div>
+        </div>
+        <div class="hero-stat">
+          <div class="stat-icon"><i class="fas fa-sync-alt"></i></div>
+          <div class="stat-value">Live</div>
+          <div class="stat-label">Sync</div>
+        </div>
+      </div>
     </div>
+  </div>
+</section>
+
+<!-- Revolutionary Dashboard -->
+<section class="container">
+  <!-- Glassmorphism Data Cards -->
+  <div class="dashboard-grid">
+    <!-- Personal Profile Card -->
+    <div class="data-card profile-card" data-sheet="Profile" tabindex="0" role="button" aria-label="Manage Personal Profile">
+      <div class="card-background-effect"></div>
+      <div class="card-header">
+        <div class="card-icon-container">
+          <div class="card-icon profile-icon">
+            <i class="fas fa-user-astronaut"></i>
+            <div class="icon-pulse"></div>
+          </div>
+          <div class="card-badge">Essential</div>
+        </div>
+        <h3 class="card-title">Personal Profile</h3>
+        <p class="card-description">
+          Create your digital identity with comprehensive personal information, 
+          professional summary, and contact details in a stunning interface.
+        </p>
+      </div>
+      
+      <div class="card-stats">
+        <div class="stat-circle">
+          <div class="stat-number" id="profileCount">-</div>
+          <div class="stat-progress">
+            <svg class="progress-ring" width="80" height="80">
+              <circle class="progress-ring-circle" cx="40" cy="40" r="35" fill="transparent" stroke="#e1e5e9" stroke-width="4"/>
+              <circle class="progress-ring-fill" cx="40" cy="40" r="35" fill="transparent" stroke="url(#profileGradient)" stroke-width="4"/>
+              <defs>
+                <linearGradient id="profileGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#667eea"/>
+                  <stop offset="100%" style="stop-color:#764ba2"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+        </div>
+        <span class="stat-label">Profile Records</span>
+      </div>
+      
+      <div class="card-actions">
+        <button class="btn btn-secondary btn-sm" onclick="viewData('Profile')" aria-label="View Profile Data">
+          <i class="fas fa-eye"></i>
+          <span>View Details</span>
+          <div class="btn-ripple"></div>
+        </button>
+        <button class="btn btn-primary btn-sm" onclick="showEditModal('Profile')" aria-label="Edit Profile">
+          <i class="fas fa-magic"></i>
+          <span>Edit Profile</span>
+          <div class="btn-ripple"></div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Work Experience Card -->
+    <div class="data-card experience-card" data-sheet="Experience" tabindex="0" role="button" aria-label="Manage Work Experience">
+      <div class="card-background-effect"></div>
+      <div class="card-header">
+        <div class="card-icon-container">
+          <div class="card-icon experience-icon">
+            <i class="fas fa-rocket"></i>
+            <div class="icon-pulse"></div>
+          </div>
+          <div class="card-badge">Career</div>
+        </div>
+        <h3 class="card-title">Work Experience</h3>
+        <p class="card-description">
+          Document your professional journey with detailed work history, 
+          career progression, and achievements in an elegant timeline.
+        </p>
+      </div>
+      
+      <div class="card-stats">
+        <div class="stat-circle">
+          <div class="stat-number" id="experienceCount">-</div>
+          <div class="stat-progress">
+            <svg class="progress-ring" width="80" height="80">
+              <circle class="progress-ring-circle" cx="40" cy="40" r="35" fill="transparent" stroke="#e1e5e9" stroke-width="4"/>
+              <circle class="progress-ring-fill" cx="40" cy="40" r="35" fill="transparent" stroke="url(#experienceGradient)" stroke-width="4"/>
+              <defs>
+                <linearGradient id="experienceGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#f093fb"/>
+                  <stop offset="100%" style="stop-color:#f5576c"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+        </div>
+        <span class="stat-label">Experience Records</span>
+      </div>
+      
+      <div class="card-actions">
+        <button class="btn btn-secondary btn-sm" onclick="viewData('Experience')" aria-label="View Experience Data">
+          <i class="fas fa-telescope"></i>
+          <span>View All</span>
+          <div class="btn-ripple"></div>
+        </button>
+        <button class="btn btn-primary btn-sm" onclick="showAddModal('Experience')" aria-label="Add New Experience">
+          <i class="fas fa-plus-circle"></i>
+          <span>Add New</span>
+          <div class="btn-ripple"></div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Certifications Card -->
+    <div class="data-card certification-card" data-sheet="Certifications" tabindex="0" role="button" aria-label="Manage Certifications">
+      <div class="card-background-effect"></div>
+      <div class="card-header">
+        <div class="card-icon-container">
+          <div class="card-icon certification-icon">
+            <i class="fas fa-medal"></i>
+            <div class="icon-pulse"></div>
+          </div>
+          <div class="card-badge">Achievement</div>
+        </div>
+        <h3 class="card-title">Certifications</h3>
+        <p class="card-description">
+          Showcase your professional achievements and continuous learning 
+          with a comprehensive collection of certificates and credentials.
+        </p>
+      </div>
+      
+      <div class="card-stats">
+        <div class="stat-circle">
+          <div class="stat-number" id="certificationsCount">-</div>
+          <div class="stat-progress">
+            <svg class="progress-ring" width="80" height="80">
+              <circle class="progress-ring-circle" cx="40" cy="40" r="35" fill="transparent" stroke="#e1e5e9" stroke-width="4"/>
+              <circle class="progress-ring-fill" cx="40" cy="40" r="35" fill="transparent" stroke="url(#certificationGradient)" stroke-width="4"/>
+              <defs>
+                <linearGradient id="certificationGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#4facfe"/>
+                  <stop offset="100%" style="stop-color:#00f2fe"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+        </div>
+        <span class="stat-label">Certificates</span>
+      </div>
+      
+      <div class="card-actions">
+        <button class="btn btn-secondary btn-sm" onclick="viewData('Certifications')" aria-label="View Certifications Data">
+          <i class="fas fa-gem"></i>
+          <span>View All</span>
+          <div class="btn-ripple"></div>
+        </button>
+        <button class="btn btn-primary btn-sm" onclick="showAddModal('Certifications')" aria-label="Add New Certification">
+          <i class="fas fa-star"></i>
+          <span>Add New</span>
+          <div class="btn-ripple"></div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Portfolio Projects Card -->
+    <div class="data-card project-card" data-sheet="Project" tabindex="0" role="button" aria-label="Manage Portfolio Projects">
+      <div class="card-background-effect"></div>
+      <div class="card-header">
+        <div class="card-icon-container">
+          <div class="card-icon project-icon">
+            <i class="fas fa-satellite"></i>
+            <div class="icon-pulse"></div>
+          </div>
+          <div class="card-badge">Portfolio</div>
+        </div>
+        <h3 class="card-title">Portfolio Projects</h3>
+        <p class="card-description">
+          Curate your best work and technical achievements with detailed 
+          project descriptions, technologies used, and live demonstrations.
+        </p>
+      </div>
+      
+      <div class="card-stats">
+        <div class="stat-circle">
+          <div class="stat-number" id="projectCount">-</div>
+          <div class="stat-progress">
+            <svg class="progress-ring" width="80" height="80">
+              <circle class="progress-ring-circle" cx="40" cy="40" r="35" fill="transparent" stroke="#e1e5e9" stroke-width="4"/>
+              <circle class="progress-ring-fill" cx="40" cy="40" r="35" fill="transparent" stroke="url(#projectGradient)" stroke-width="4"/>
+              <defs>
+                <linearGradient id="projectGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#11998e"/>
+                  <stop offset="100%" style="stop-color:#38ef7d"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+        </div>
+        <span class="stat-label">Projects</span>
+      </div>
+      
+      <div class="card-actions">
+        <button class="btn btn-secondary btn-sm" onclick="viewData('Project')" aria-label="View Projects Data">
+          <i class="fas fa-space-shuttle"></i>
+          <span>View All</span>
+          <div class="btn-ripple"></div>
+        </button>
+        <button class="btn btn-primary btn-sm" onclick="showAddModal('Project')" aria-label="Add New Project">
+          <i class="fas fa-rocket"></i>
+          <span>Add New</span>
+          <div class="btn-ripple"></div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Enhanced Overview Statistics Dashboard -->
+  <div class="overview-stats">
+    <div class="stats-header">
+      <h2 class="stats-title">
+        <i class="fas fa-chart-line me-2"></i>
+        System Overview
+      </h2>
+      <p class="stats-subtitle">Real-time insights into your data management system</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-icon-wrapper">
+          <div class="stat-icon">
+            <i class="fas fa-database"></i>
+          </div>
+          <div class="stat-glow"></div>
+        </div>
+        <div class="stat-content">
+          <div class="stat-value" id="totalRecords">-</div>
+          <div class="stat-text">Total Records</div>
+          <div class="stat-trend">
+            <i class="fas fa-arrow-up"></i>
+            <span>+12% this month</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="stat-item">
+        <div class="stat-icon-wrapper">
+          <div class="stat-icon">
+            <i class="fas fa-sync-alt"></i>
+          </div>
+          <div class="stat-glow"></div>
+        </div>
+        <div class="stat-content">
+          <div class="stat-value">Live</div>
+          <div class="stat-text">Sync Status</div>
+          <div class="stat-trend">
+            <i class="fas fa-check-circle"></i>
+            <span>All systems operational</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="stat-item">
+        <div class="stat-icon-wrapper">
+          <div class="stat-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <div class="stat-glow"></div>
+        </div>
+        <div class="stat-content">
+          <div class="stat-value">100%</div>
+          <div class="stat-text">Data Protection</div>
+          <div class="stat-trend">
+            <i class="fas fa-lock"></i>
+            <span>Encrypted & secure</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="stat-item">
+        <div class="stat-icon-wrapper">
+          <div class="stat-icon">
+            <i class="fas fa-cloud"></i>
+          </div>
+          <div class="stat-glow"></div>
+        </div>
+        <div class="stat-content">
+          <div class="stat-value">Cloud</div>
+          <div class="stat-text">Storage</div>
+          <div class="stat-trend">
+            <i class="fas fa-server"></i>
+            <span>Google Sheets integrated</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Revolutionary Data View Modal -->
+<div class="modal fade" id="dataViewModal" tabindex="-1" aria-labelledby="dataViewModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title-wrapper">
+          <div class="modal-icon" id="modalIcon">
+            <i class="fas fa-table"></i>
+          </div>
+          <div>
+            <h5 class="modal-title" id="modalTitle">Data Management</h5>
+            <p class="modal-subtitle" id="modalSubtitle">Manage your data records</p>
+          </div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-0">
+        <div id="dataTableContainer">
+          <div class="text-center p-5">
+            <div class="loading-spinner-container">
+              <div class="loading-spinner"></div>
+              <div class="loading-orbit"></div>
+            </div>
+            <div class="loading-text">Loading data...</div>
+            <div class="loading-subtext">Please wait while we fetch your records</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- Data View Modal -->
-<div class="modal fade" id="dataViewModal" tabindex="-1" data-bs-backdrop="static">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content modal-modern">
-            <div class="modal-header-modern">
-                <div class="d-flex align-items-center">
-                    <div class="modal-icon me-3" id="modalIcon">
-                        <i class="fas fa-table"></i>
-                    </div>
-                    <div>
-                        <h5 class="modal-title mb-0" id="modalTitle">Data Management</h5>
-                        <small class="text-muted" id="modalSubtitle">Manage your data records</small>
-                    </div>
-                </div>
-                <button type="button" class="btn-close btn-close-modern" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body-modern p-0">
-                <div class="table-container" id="dataTableContainer">
-                    <div class="text-center p-5">
-                        <div class="spinner-border text-primary" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                        <div class="mt-3">Loading data...</div>
-                    </div>
-                </div>
-            </div>
+<!-- Revolutionary Horizontal Profile Edit Modal -->
+<div class="modal fade" id="profileEditModal" tabindex="-1" aria-labelledby="profileEditModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title-wrapper">
+          <div class="modal-icon profile-icon">
+            <i class="fas fa-user-edit"></i>
+          </div>
+          <div>
+            <h5 class="modal-title">Edit Personal Profile</h5>
+            <p class="modal-subtitle">Update your personal information with our revolutionary interface</p>
+          </div>
         </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="profileForm" enctype="multipart/form-data">
+          <div class="horizontal-form">
+            <!-- Left Side - Image Upload -->
+            <div class="form-left">
+              <div class="form-group">
+                <label for="profileImage" class="form-label">
+                  <i class="fas fa-camera me-2"></i>Profile Photo
+                </label>
+                <div class="file-upload-container">
+                  <div class="file-upload" id="profileImageUpload">
+                    <input type="file" id="profileImage" accept="image/*">
+                    <div class="file-upload-icon">
+                      <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <div class="file-upload-text">
+                      <strong>Choose image or drag and drop</strong><br>
+                      <small>PNG, JPG, GIF up to 10MB</small>
+                    </div>
+                    <div class="upload-progress">
+                      <div class="progress-bar"></div>
+                    </div>
+                  </div>
+                  <div class="image-preview" id="profileImagePreview">
+                    <img class="preview-image" id="previewImg" alt="Profile preview">
+                    <div class="preview-info">
+                      <div class="preview-filename" id="previewFilename"></div>
+                      <div class="preview-size" id="previewSize"></div>
+                      <button type="button" class="remove-image" onclick="removeImage('profile')">
+                        <i class="fas fa-trash me-1"></i>Remove
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Side - Form Fields -->
+            <div class="form-right">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="nama_lengkap" class="form-label">
+                    <i class="fas fa-user me-2"></i>Full Name *
+                  </label>
+                  <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" required placeholder="Enter your full name">
+                  <div class="input-focus-line"></div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="profesi" class="form-label">
+                    <i class="fas fa-briefcase me-2"></i>Profession *
+                  </label>
+                  <input type="text" class="form-control" id="profesi" name="profesi" required placeholder="Your current profession">
+                  <div class="input-focus-line"></div>
+                </div>
+                
+                <div class="form-group form-grid-full">
+                  <label for="Deskripsi" class="form-label">
+                    <i class="fas fa-align-left me-2"></i>Professional Description
+                  </label>
+                  <textarea class="form-control" id="Deskripsi" name="Deskripsi" rows="4" placeholder="Tell us about yourself and your professional background..."></textarea>
+                  <div class="input-focus-line"></div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="Email" class="form-label">
+                    <i class="fas fa-envelope me-2"></i>Email Address
+                  </label>
+                  <input type="email" class="form-control" id="Email" name="Email" placeholder="your.email@example.com">
+                  <div class="input-focus-line"></div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="Nomor_Telepon" class="form-label">
+                    <i class="fas fa-phone me-2"></i>Phone Number
+                  </label>
+                  <input type="tel" class="form-control" id="Nomor_Telepon" name="Nomor_Telepon" placeholder="+1 (555) 123-4567">
+                  <div class="input-focus-line"></div>
+                </div>
+                
+                <div class="form-group form-grid-full">
+                  <label for="Lokasi" class="form-label">
+                    <i class="fas fa-map-marker-alt me-2"></i>Location
+                  </label>
+                  <input type="text" class="form-control" id="Lokasi" name="Lokasi" placeholder="City, State, Country">
+                  <div class="input-focus-line"></div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="Link_LinkedIn" class="form-label">
+                    <i class="fab fa-linkedin me-2"></i>LinkedIn Profile
+                  </label>
+                  <input type="url" class="form-control" id="Link_LinkedIn" name="Link_LinkedIn" placeholder="https://linkedin.com/in/yourprofile">
+                  <div class="input-focus-line"></div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="Link_GitHub" class="form-label">
+                    <i class="fab fa-github me-2"></i>GitHub Profile
+                  </label>
+                  <input type="url" class="form-control" id="Link_GitHub" name="Link_GitHub" placeholder="https://github.com/yourusername">
+                  <div class="input-focus-line"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          <i class="fas fa-times me-2"></i>Cancel
+          <div class="btn-ripple"></div>
+        </button>
+        <button type="button" class="btn btn-primary" onclick="saveProfile()">
+          <i class="fas fa-save me-2"></i>Save Changes
+          <div class="btn-ripple"></div>
+        </button>
+      </div>
     </div>
+  </div>
 </div>
 
-<!-- Profile Edit Modal -->
-<div class="modal fade" id="profileEditModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content modal-modern">
-            <div class="modal-header-modern">
-                <div class="d-flex align-items-center">
-                    <div class="modal-icon profile-icon me-3">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <div>
-                        <h5 class="modal-title mb-0">Edit Profile</h5>
-                        <small class="text-muted">Update your personal information</small>
-                    </div>
-                </div>
-                <button type="button" class="btn-close btn-close-modern" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body-modern">
-                <form id="profileForm" enctype="multipart/form-data">
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <div class="form-group-modern">
-                                <label for="nama_lengkap" class="form-label-modern">Full Name *</label>
-                                <input type="text" class="form-control-modern" id="nama_lengkap" name="nama_lengkap" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group-modern">
-                                <label for="profesi" class="form-label-modern">Profession *</label>
-                                <input type="text" class="form-control-modern" id="profesi" name="profesi" required>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group-modern">
-                                <label for="Deskripsi" class="form-label-modern">Description</label>
-                                <textarea class="form-control-modern" id="Deskripsi" name="Deskripsi" rows="3"></textarea>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group-modern">
-                                <label for="profileImage" class="form-label-modern">Profile Photo</label>
-                                <div class="file-upload-modern">
-                                    <input type="file" class="form-control-modern" id="profileImage" accept="image/*">
-                                    <div class="file-upload-text">
-                                        <i class="fas fa-cloud-upload-alt me-2"></i>
-                                        Choose image or drag and drop
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group-modern">
-                                <label for="Email" class="form-label-modern">Email</label>
-                                <input type="email" class="form-control-modern" id="Email" name="Email">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group-modern">
-                                <label for="Nomor_Telepon" class="form-label-modern">Phone Number</label>
-                                <input type="text" class="form-control-modern" id="Nomor_Telepon" name="Nomor_Telepon">
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group-modern">
-                                <label for="Lokasi" class="form-label-modern">Location</label>
-                                <input type="text" class="form-control-modern" id="Lokasi" name="Lokasi">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group-modern">
-                                <label for="Link_LinkedIn" class="form-label-modern">LinkedIn URL</label>
-                                <input type="url" class="form-control-modern" id="Link_LinkedIn" name="Link_LinkedIn">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group-modern">
-                                <label for="Link_GitHub" class="form-label-modern">GitHub URL</label>
-                                <input type="url" class="form-control-modern" id="Link_GitHub" name="Link_GitHub">
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer-modern">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" onclick="saveProfile()">
-                    <i class="fas fa-save me-1"></i>Save Changes
-                </button>
-            </div>
+<!-- Revolutionary Horizontal Dynamic Form Modal -->
+<div class="modal fade" id="dynamicFormModal" tabindex="-1" aria-labelledby="dynamicFormModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title-wrapper">
+          <div class="modal-icon" id="dynamicModalIcon">
+            <i class="fas fa-plus"></i>
+          </div>
+          <div>
+            <h5 class="modal-title" id="dynamicModalTitle">Add Record</h5>
+            <p class="modal-subtitle" id="dynamicModalSubtitle">Create new record with our revolutionary interface</p>
+          </div>
         </div>
-    </div>
-</div>
-
-<!-- Dynamic Form Modal -->
-<div class="modal fade" id="dynamicFormModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content modal-modern">
-            <div class="modal-header-modern">
-                <div class="d-flex align-items-center">
-                    <div class="modal-icon me-3" id="dynamicModalIcon">
-                        <i class="fas fa-plus"></i>
-                    </div>
-                    <div>
-                        <h5 class="modal-title mb-0" id="dynamicModalTitle">Add Record</h5>
-                        <small class="text-muted" id="dynamicModalSubtitle">Create new record</small>
-                    </div>
-                </div>
-                <button type="button" class="btn-close btn-close-modern" data-bs-dismiss="modal"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="dynamicFormContainer">
+          <div class="text-center p-4">
+            <div class="loading-spinner-container">
+              <div class="loading-spinner"></div>
+              <div class="loading-orbit"></div>
             </div>
-            <div class="modal-body-modern">
-                <div id="dynamicFormContainer">
-                    <!-- Form will be generated dynamically -->
-                </div>
-            </div>
-            <div class="modal-footer-modern">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="saveDynamicRecord">
-                    <i class="fas fa-save me-1"></i>Save Record
-                </button>
-            </div>
+            <div class="loading-text">Preparing form...</div>
+          </div>
         </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          <i class="fas fa-times me-2"></i>Cancel
+          <div class="btn-ripple"></div>
+        </button>
+        <button type="button" class="btn btn-primary" id="saveDynamicRecord">
+          <i class="fas fa-save me-2"></i>Save Record
+          <div class="btn-ripple"></div>
+        </button>
+      </div>
     </div>
+  </div>
 </div>
 {% endblock %}
 
 {% block scripts %}
 <script>
-// Initialize dashboard when DOM is loaded
+// Revolutionary initialization with enhanced animations and particles
 document.addEventListener('DOMContentLoaded', function() {
-    initializeDashboard();
+  initializeDashboard();
+  initializeImagePreview();
+  initializeParticles();
+  initializeProgressRings();
+  
+  // Update total records calculation
+  function updateTotalRecords() {
+    const profileCount = parseInt(document.getElementById('profileCount').textContent) || 0;
+    const experienceCount = parseInt(document.getElementById('experienceCount').textContent) || 0;
+    const certificationsCount = parseInt(document.getElementById('certificationsCount').textContent) || 0;
+    const projectCount = parseInt(document.getElementById('projectCount').textContent) || 0;
+    
+    const total = profileCount + experienceCount + certificationsCount + projectCount;
+    document.getElementById('totalRecords').textContent = total;
+    document.getElementById('heroTotalRecords').textContent = total;
+  }
+  
+  // Override loadDataCount to update total and progress rings
+  const originalLoadDataCount = window.loadDataCount;
+  window.loadDataCount = async function(sheetName) {
+    await originalLoadDataCount(sheetName);
+    updateTotalRecords();
+    updateProgressRing(sheetName);
+  };
+  
+  // Enhanced keyboard shortcuts
+  document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key >= '1' && e.key <= '4') {
+      e.preventDefault();
+      const sheets = ['Profile', 'Experience', 'Certifications', 'Project'];
+      const sheetIndex = parseInt(e.key) - 1;
+      if (sheets[sheetIndex]) {
+        viewData(sheets[sheetIndex]);
+      }
+    }
+    
+    // Escape to close modals
+    if (e.key === 'Escape') {
+      const openModals = document.querySelectorAll('.modal.show');
+      openModals.forEach(modal => {
+        const modalInstance = bootstrap.Modal.getInstance(modal);
+        if (modalInstance) modalInstance.hide();
+      });
+    }
+  });
+  
+  // Enhanced navbar scroll effect
+  let lastScrollTop = 0;
+  window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navbar');
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    if (scrollTop > 50) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+    
+    lastScrollTop = scrollTop;
+  });
+  
+  // Enhanced card interactions with micro-animations
+  document.querySelectorAll('.data-card').forEach(card => {
+    const sheet = card.dataset.sheet;
+    
+    // Click handler with enhanced ripple effect
+    card.addEventListener('click', (e) => {
+      if (!e.target.closest('button')) {
+        createAdvancedRipple(e, card);
+        setTimeout(() => viewData(sheet), 150);
+      }
+    });
+    
+    // Keyboard navigation
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        if (!e.target.closest('button')) {
+          createAdvancedRipple(e, card);
+          setTimeout(() => viewData(sheet), 150);
+        }
+      }
+    });
+    
+    // Enhanced hover effects
+    card.addEventListener('mouseenter', () => {
+      card.querySelector('.card-background-effect').style.opacity = '1';
+      card.querySelector('.icon-pulse').style.animationPlayState = 'running';
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      card.querySelector('.card-background-effect').style.opacity = '0';
+      card.querySelector('.icon-pulse').style.animationPlayState = 'paused';
+    });
+  });
+  
+  // Enhanced button interactions
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      createButtonRipple(e, this);
+    });
+  });
+});
+
+// Initialize animated particles background
+function initializeParticles() {
+  const particlesContainer = document.getElementById('particles');
+  const particleCount = 50;
+  
+  for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.cssText = `
+      position: absolute;
+      width: ${Math.random() * 4 + 2}px;
+      height: ${Math.random() * 4 + 2}px;
+      background: rgba(255, 255, 255, ${Math.random() * 0.5 + 0.1});
+      border-radius: 50%;
+      left: ${Math.random() * 100}%;
+      top: ${Math.random() * 100}%;
+      animation: float ${Math.random() * 20 + 10}s infinite linear;
+      animation-delay: ${Math.random() * 20}s;
+    `;
+    particlesContainer.appendChild(particle);
+  }
+}
+
+// Initialize progress rings for cards
+function initializeProgressRings() {
+  const rings = document.querySelectorAll('.progress-ring-fill');
+  rings.forEach(ring => {
+    const radius = ring.r.baseVal.value;
+    const circumference = radius * 2 * Math.PI;
+    ring.style.strokeDasharray = `${circumference} ${circumference}`;
+    ring.style.strokeDashoffset = circumference;
+  });
+}
+
+// Update progress ring animation
+function updateProgressRing(sheetName) {
+  const countElement = document.getElementById(`${sheetName.toLowerCase()}Count`);
+  const count = parseInt(countElement.textContent) || 0;
+  const maxCount = 10; // Adjust based on your needs
+  const percentage = Math.min(count / maxCount, 1);
+  
+  const ring = document.querySelector(`.${sheetName.toLowerCase()}-card .progress-ring-fill`);
+  if (ring) {
+    const radius = ring.r.baseVal.value;
+    const circumference = radius * 2 * Math.PI;
+    const offset = circumference - (percentage * circumference);
+    ring.style.strokeDashoffset = offset;
+  }
+}
+
+// Enhanced ripple effect with advanced animations
+function createAdvancedRipple(event, element) {
+  const ripple = document.createElement('div');
+  const rect = element.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height) * 1.5;
+  const x = event.clientX - rect.left - size / 2;
+  const y = event.clientY - rect.top - size / 2;
+
+  ripple.className = 'advanced-ripple';
+  ripple.style.cssText = `
+    position: absolute;
+    width: ${size}px;
+    height: ${size}px;
+    left: ${x}px;
+    top: ${y}px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
+    border-radius: 50%;
+    transform: scale(0);
+    animation: advancedRipple 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    z-index: 10;
+  `;
+
+  element.style.position = 'relative';
+  element.style.overflow = 'hidden';
+  element.appendChild(ripple);
+
+  setTimeout(() => {
+    ripple.remove();
+  }, 800);
+}
+
+// Button ripple effect
+function createButtonRipple(event, button) {
+  const ripple = button.querySelector('.btn-ripple');
+  if (!ripple) return;
+  
+  const rect = button.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height);
+  const x = event.clientX - rect.left - size / 2;
+  const y = event.clientY - rect.top - size / 2;
+  
+  ripple.style.cssText = `
+    position: absolute;
+    width: ${size}px;
+    height: ${size}px;
+    left: ${x}px;
+    top: ${y}px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    transform: scale(0);
+    animation: buttonRipple 0.6s ease-out;
+    pointer-events: none;
+  `;
+}
+
+// Enhanced connection status monitoring
+function updateConnectionStatus() {
+  const statusIndicator = document.querySelector('.status-indicator');
+  const statusText = statusIndicator.querySelector('.status-text');
+  const connectionWave = statusIndicator.querySelector('.connection-wave');
+  
+  if (navigator.onLine) {
+    statusText.textContent = 'Connected to Google Sheets';
+    statusIndicator.style.color = 'var(--success)';
+    connectionWave.style.animationPlayState = 'running';
+  } else {
+    statusText.textContent = 'Connection Lost';
+    statusIndicator.style.color = 'var(--danger)';
+    connectionWave.style.animationPlayState = 'paused';
+  }
+}
+
+window.addEventListener('online', updateConnectionStatus);
+window.addEventListener('offline', updateConnectionStatus);
+
+// Enhanced error handling
+window.addEventListener('error', function(e) {
+  console.error('Application error:', e.error);
+  showAlert('An unexpected error occurred. Please refresh the page and try again.', 'danger');
 });
 </script>
 {% endblock %}
