@@ -1,6 +1,7 @@
 import requests
 import logging
 import base64
+import time
 from urllib.parse import urlencode
 
 class GoogleSheetsService:
@@ -67,13 +68,25 @@ class GoogleSheetsService:
             if ',' in image_data:
                 image_data = image_data.split(',')[1]
             
+            # Create payload for image upload
             payload = {
                 'action': 'upload_image',
-                'image_data': image_data
+                'image_data': image_data,
+                'filename': f'uploaded_image_{int(time.time())}.jpg'
             }
             
+            # Make request to Apps Script
             response = self._make_request('POST', data=payload)
-            return response.get('url', '')
+            
+            # Return the URL from the response
+            if isinstance(response, dict) and 'url' in response:
+                return response['url']
+            elif isinstance(response, str) and response.startswith('http'):
+                return response
+            else:
+                self.logger.error(f"Unexpected response format: {response}")
+                raise Exception("Invalid response format from image upload")
+                
         except Exception as e:
             self.logger.error(f"Image upload failed: {str(e)}")
             raise Exception(f"Failed to upload image: {str(e)}")

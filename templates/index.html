@@ -1,116 +1,125 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="row">
-    <div class="col-12">
-        <h1 class="mb-4">
-            <i class="fas fa-database me-2"></i>Data Management Dashboard
-        </h1>
-        
-        <!-- Navigation Tabs -->
-        <ul class="nav nav-tabs mb-4" id="sheetTabs" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab">
-                    <i class="fas fa-user me-1"></i>Profile
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="experience-tab" data-bs-toggle="tab" data-bs-target="#experience" type="button" role="tab">
-                    <i class="fas fa-briefcase me-1"></i>Experience
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="certifications-tab" data-bs-toggle="tab" data-bs-target="#certifications" type="button" role="tab">
-                    <i class="fas fa-certificate me-1"></i>Certifications
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="project-tab" data-bs-toggle="tab" data-bs-target="#project" type="button" role="tab">
-                    <i class="fas fa-project-diagram me-1"></i>Projects
-                </button>
-            </li>
-        </ul>
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="container">
+        <div class="row align-items-center min-vh-100">
+            <div class="col-12">
+                <div class="text-center mb-5 animate__animated animate__fadeInUp">
+                    <h1 class="hero-title mb-3">
+                        <i class="fas fa-chart-line me-3 text-primary"></i>
+                        Data Management Dashboard
+                    </h1>
+                    <p class="hero-subtitle">Manage your profile, experience, certifications, and projects seamlessly</p>
+                </div>
 
-        <!-- Tab Content -->
-        <div class="tab-content" id="sheetTabContent">
-            <!-- Profile Tab -->
-            <div class="tab-pane fade show active" id="profile" role="tabpanel">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Profile Management</h5>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#profileModal">
-                            <i class="fas fa-plus me-1"></i>Add Profile
-                        </button>
-                    </div>
-                    <div class="card-body">
-                        <div id="profileTable">
-                            <div class="text-center">
-                                <div class="spinner-border" role="status">
-                                    <span class="visually-hidden">Loading...</span>
+                <!-- Modern Card Grid -->
+                <div class="row g-4">
+                    <!-- Profile Card -->
+                    <div class="col-lg-6 col-xl-3">
+                        <div class="data-card h-100 animate__animated animate__fadeInUp animate__delay-1s" data-sheet="Profile">
+                            <div class="card-header-modern">
+                                <div class="card-icon profile-icon">
+                                    <i class="fas fa-user"></i>
                                 </div>
+                                <h5 class="card-title-modern">Profile</h5>
+                                <p class="card-description">Personal information and contact details</p>
+                            </div>
+                            <div class="card-stats">
+                                <div class="stat-item">
+                                    <span class="stat-number" id="profileCount">-</span>
+                                    <span class="stat-label">Records</span>
+                                </div>
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn btn-outline-light btn-sm" onclick="viewData('Profile')">
+                                    <i class="fas fa-eye me-1"></i>View
+                                </button>
+                                <button class="btn btn-light btn-sm" onclick="showEditModal('Profile')">
+                                    <i class="fas fa-edit me-1"></i>Edit
+                                </button>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- Experience Tab -->
-            <div class="tab-pane fade" id="experience" role="tabpanel">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Experience Management</h5>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#experienceModal">
-                            <i class="fas fa-plus me-1"></i>Add Experience
-                        </button>
-                    </div>
-                    <div class="card-body">
-                        <div id="experienceTable">
-                            <div class="text-center">
-                                <div class="spinner-border" role="status">
-                                    <span class="visually-hidden">Loading...</span>
+                    <!-- Experience Card -->
+                    <div class="col-lg-6 col-xl-3">
+                        <div class="data-card h-100 animate__animated animate__fadeInUp animate__delay-2s" data-sheet="Experience">
+                            <div class="card-header-modern">
+                                <div class="card-icon experience-icon">
+                                    <i class="fas fa-briefcase"></i>
                                 </div>
+                                <h5 class="card-title-modern">Experience</h5>
+                                <p class="card-description">Work history and professional experience</p>
+                            </div>
+                            <div class="card-stats">
+                                <div class="stat-item">
+                                    <span class="stat-number" id="experienceCount">-</span>
+                                    <span class="stat-label">Records</span>
+                                </div>
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn btn-outline-light btn-sm" onclick="viewData('Experience')">
+                                    <i class="fas fa-eye me-1"></i>View
+                                </button>
+                                <button class="btn btn-light btn-sm" onclick="showAddModal('Experience')">
+                                    <i class="fas fa-plus me-1"></i>Add
+                                </button>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- Certifications Tab -->
-            <div class="tab-pane fade" id="certifications" role="tabpanel">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Certifications Management</h5>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#certificationsModal">
-                            <i class="fas fa-plus me-1"></i>Add Certification
-                        </button>
-                    </div>
-                    <div class="card-body">
-                        <div id="certificationsTable">
-                            <div class="text-center">
-                                <div class="spinner-border" role="status">
-                                    <span class="visually-hidden">Loading...</span>
+                    <!-- Certifications Card -->
+                    <div class="col-lg-6 col-xl-3">
+                        <div class="data-card h-100 animate__animated animate__fadeInUp animate__delay-3s" data-sheet="Certifications">
+                            <div class="card-header-modern">
+                                <div class="card-icon certification-icon">
+                                    <i class="fas fa-certificate"></i>
                                 </div>
+                                <h5 class="card-title-modern">Certifications</h5>
+                                <p class="card-description">Professional certificates and achievements</p>
+                            </div>
+                            <div class="card-stats">
+                                <div class="stat-item">
+                                    <span class="stat-number" id="certificationsCount">-</span>
+                                    <span class="stat-label">Records</span>
+                                </div>
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn btn-outline-light btn-sm" onclick="viewData('Certifications')">
+                                    <i class="fas fa-eye me-1"></i>View
+                                </button>
+                                <button class="btn btn-light btn-sm" onclick="showAddModal('Certifications')">
+                                    <i class="fas fa-plus me-1"></i>Add
+                                </button>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- Projects Tab -->
-            <div class="tab-pane fade" id="project" role="tabpanel">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Projects Management</h5>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#projectModal">
-                            <i class="fas fa-plus me-1"></i>Add Project
-                        </button>
-                    </div>
-                    <div class="card-body">
-                        <div id="projectTable">
-                            <div class="text-center">
-                                <div class="spinner-border" role="status">
-                                    <span class="visually-hidden">Loading...</span>
+                    <!-- Project Card -->
+                    <div class="col-lg-6 col-xl-3">
+                        <div class="data-card h-100 animate__animated animate__fadeInUp animate__delay-4s" data-sheet="Project">
+                            <div class="card-header-modern">
+                                <div class="card-icon project-icon">
+                                    <i class="fas fa-project-diagram"></i>
                                 </div>
+                                <h5 class="card-title-modern">Projects</h5>
+                                <p class="card-description">Portfolio projects and achievements</p>
+                            </div>
+                            <div class="card-stats">
+                                <div class="stat-item">
+                                    <span class="stat-number" id="projectCount">-</span>
+                                    <span class="stat-label">Records</span>
+                                </div>
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn btn-outline-light btn-sm" onclick="viewData('Project')">
+                                    <i class="fas fa-eye me-1"></i>View
+                                </button>
+                                <button class="btn btn-light btn-sm" onclick="showAddModal('Project')">
+                                    <i class="fas fa-plus me-1"></i>Add
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -120,244 +129,165 @@
     </div>
 </div>
 
-<!-- Profile Modal -->
-<div class="modal fade" id="profileModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Profile Form</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+<!-- Data View Modal -->
+<div class="modal fade" id="dataViewModal" tabindex="-1" data-bs-backdrop="static">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content modal-modern">
+            <div class="modal-header-modern">
+                <div class="d-flex align-items-center">
+                    <div class="modal-icon me-3" id="modalIcon">
+                        <i class="fas fa-table"></i>
+                    </div>
+                    <div>
+                        <h5 class="modal-title mb-0" id="modalTitle">Data Management</h5>
+                        <small class="text-muted" id="modalSubtitle">Manage your data records</small>
+                    </div>
+                </div>
+                <button type="button" class="btn-close btn-close-modern" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body-modern p-0">
+                <div class="table-container" id="dataTableContainer">
+                    <div class="text-center p-5">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <div class="mt-3">Loading data...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Profile Edit Modal -->
+<div class="modal fade" id="profileEditModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content modal-modern">
+            <div class="modal-header-modern">
+                <div class="d-flex align-items-center">
+                    <div class="modal-icon profile-icon me-3">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                        <h5 class="modal-title mb-0">Edit Profile</h5>
+                        <small class="text-muted">Update your personal information</small>
+                    </div>
+                </div>
+                <button type="button" class="btn-close btn-close-modern" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body-modern">
                 <form id="profileForm" enctype="multipart/form-data">
-                    <div class="row">
+                    <div class="row g-3">
                         <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="nama_lengkap" class="form-label">Full Name *</label>
-                                <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" required>
+                            <div class="form-group-modern">
+                                <label for="nama_lengkap" class="form-label-modern">Full Name *</label>
+                                <input type="text" class="form-control-modern" id="nama_lengkap" name="nama_lengkap" required>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="profesi" class="form-label">Profession *</label>
-                                <input type="text" class="form-control" id="profesi" name="profesi" required>
+                            <div class="form-group-modern">
+                                <label for="profesi" class="form-label-modern">Profession *</label>
+                                <input type="text" class="form-control-modern" id="profesi" name="profesi" required>
                             </div>
                         </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="Deskripsi" class="form-label">Description</label>
-                        <textarea class="form-control" id="Deskripsi" name="Deskripsi" rows="3"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="profileImage" class="form-label">Profile Photo</label>
-                        <input type="file" class="form-control" id="profileImage" accept="image/*">
-                        <div class="form-text">Upload a profile photo (optional)</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="Email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="Email" name="Email">
+                        <div class="col-12">
+                            <div class="form-group-modern">
+                                <label for="Deskripsi" class="form-label-modern">Description</label>
+                                <textarea class="form-control-modern" id="Deskripsi" name="Deskripsi" rows="3"></textarea>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="Nomor_Telepon" class="form-label">Phone Number</label>
-                                <input type="text" class="form-control" id="Nomor_Telepon" name="Nomor_Telepon">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="Lokasi" class="form-label">Location</label>
-                        <input type="text" class="form-control" id="Lokasi" name="Lokasi">
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="Link_LinkedIn" class="form-label">LinkedIn URL</label>
-                                <input type="url" class="form-control" id="Link_LinkedIn" name="Link_LinkedIn">
+                        <div class="col-12">
+                            <div class="form-group-modern">
+                                <label for="profileImage" class="form-label-modern">Profile Photo</label>
+                                <div class="file-upload-modern">
+                                    <input type="file" class="form-control-modern" id="profileImage" accept="image/*">
+                                    <div class="file-upload-text">
+                                        <i class="fas fa-cloud-upload-alt me-2"></i>
+                                        Choose image or drag and drop
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="Link_GitHub" class="form-label">GitHub URL</label>
-                                <input type="url" class="form-control" id="Link_GitHub" name="Link_GitHub">
+                            <div class="form-group-modern">
+                                <label for="Email" class="form-label-modern">Email</label>
+                                <input type="email" class="form-control-modern" id="Email" name="Email">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group-modern">
+                                <label for="Nomor_Telepon" class="form-label-modern">Phone Number</label>
+                                <input type="text" class="form-control-modern" id="Nomor_Telepon" name="Nomor_Telepon">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group-modern">
+                                <label for="Lokasi" class="form-label-modern">Location</label>
+                                <input type="text" class="form-control-modern" id="Lokasi" name="Lokasi">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group-modern">
+                                <label for="Link_LinkedIn" class="form-label-modern">LinkedIn URL</label>
+                                <input type="url" class="form-control-modern" id="Link_LinkedIn" name="Link_LinkedIn">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group-modern">
+                                <label for="Link_GitHub" class="form-label-modern">GitHub URL</label>
+                                <input type="url" class="form-control-modern" id="Link_GitHub" name="Link_GitHub">
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer-modern">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" onclick="saveProfile()">Save Profile</button>
+                <button type="button" class="btn btn-primary" onclick="saveProfile()">
+                    <i class="fas fa-save me-1"></i>Save Changes
+                </button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Experience Modal -->
-<div class="modal fade" id="experienceModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Experience Form</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <form id="experienceForm">
-                    <div class="mb-3">
-                        <label for="ID_pengalaman" class="form-label">Experience ID *</label>
-                        <input type="text" class="form-control" id="ID_pengalaman" name="ID_pengalaman" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="Posisi" class="form-label">Position *</label>
-                        <input type="text" class="form-control" id="Posisi" name="Posisi" required>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="Tanggal_Mulai" class="form-label">Start Date</label>
-                                <input type="date" class="form-control" id="Tanggal_Mulai" name="Tanggal_Mulai">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="Tanggal_Selesai" class="form-label">End Date</label>
-                                <input type="date" class="form-control" id="Tanggal_Selesai" name="Tanggal_Selesai">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="exp_Deskripsi" class="form-label">Description</label>
-                        <textarea class="form-control" id="exp_Deskripsi" name="Deskripsi" rows="3"></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" onclick="saveExperience()">Save Experience</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Certifications Modal -->
-<div class="modal fade" id="certificationsModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Certification Form</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <form id="certificationsForm" enctype="multipart/form-data">
-                    <div class="mb-3">
-                        <label for="ID_Sertifikasi" class="form-label">Certification ID *</label>
-                        <input type="text" class="form-control" id="ID_Sertifikasi" name="ID_Sertifikasi" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="Nama_Sertifikasi" class="form-label">Certification Name *</label>
-                        <input type="text" class="form-control" id="Nama_Sertifikasi" name="Nama_Sertifikasi" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="Tanggal_Diterbitkan" class="form-label">Issue Date</label>
-                        <input type="date" class="form-control" id="Tanggal_Diterbitkan" name="Tanggal_Diterbitkan">
-                    </div>
-                    <div class="mb-3">
-                        <label for="certificationImage" class="form-label">Certification Image</label>
-                        <input type="file" class="form-control" id="certificationImage" accept="image/*">
-                        <div class="form-text">Upload certification image (optional)</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="cert_Deskripsi" class="form-label">Description</label>
-                        <textarea class="form-control" id="cert_Deskripsi" name="Deskripsi" rows="3"></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" onclick="saveCertification()">Save Certification</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Project Modal -->
-<div class="modal fade" id="projectModal" tabindex="-1">
+<!-- Dynamic Form Modal -->
+<div class="modal fade" id="dynamicFormModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Project Form</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <div class="modal-content modal-modern">
+            <div class="modal-header-modern">
+                <div class="d-flex align-items-center">
+                    <div class="modal-icon me-3" id="dynamicModalIcon">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div>
+                        <h5 class="modal-title mb-0" id="dynamicModalTitle">Add Record</h5>
+                        <small class="text-muted" id="dynamicModalSubtitle">Create new record</small>
+                    </div>
+                </div>
+                <button type="button" class="btn-close btn-close-modern" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body">
-                <form id="projectForm" enctype="multipart/form-data">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="ID_project" class="form-label">Project ID *</label>
-                                <input type="text" class="form-control" id="ID_project" name="ID_project" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="Nama_Proyek" class="form-label">Project Name *</label>
-                                <input type="text" class="form-control" id="Nama_Proyek" name="Nama_Proyek" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="proj_Deskripsi" class="form-label">Description</label>
-                        <textarea class="form-control" id="proj_Deskripsi" name="Deskripsi" rows="3"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="Skill" class="form-label">Skills</label>
-                        <input type="text" class="form-control" id="Skill" name="Skill" placeholder="e.g., Python, JavaScript, React">
-                    </div>
-                    <div class="mb-3">
-                        <label for="Link" class="form-label">Project Link</label>
-                        <input type="url" class="form-control" id="Link" name="Link">
-                    </div>
-                    <div class="mb-3">
-                        <label for="projectImage" class="form-label">Project Image</label>
-                        <input type="file" class="form-control" id="projectImage" accept="image/*">
-                        <div class="form-text">Upload project image (optional)</div>
-                    </div>
-                </form>
+            <div class="modal-body-modern">
+                <div id="dynamicFormContainer">
+                    <!-- Form will be generated dynamically -->
+                </div>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer-modern">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" onclick="saveProject()">Save Project</button>
+                <button type="button" class="btn btn-primary" id="saveDynamicRecord">
+                    <i class="fas fa-save me-1"></i>Save Record
+                </button>
             </div>
         </div>
     </div>
 </div>
-
-<!-- Alert Container -->
-<div id="alertContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 1050;"></div>
-
 {% endblock %}
 
 {% block scripts %}
 <script>
-// Initialize the application when DOM is loaded
+// Initialize dashboard when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Load data for the active tab
-    loadSheetData('Profile');
-    
-    // Add tab change listeners
-    document.querySelectorAll('[data-bs-toggle="tab"]').forEach(tab => {
-        tab.addEventListener('shown.bs.tab', function(e) {
-            const sheetName = e.target.getAttribute('data-bs-target').substring(1);
-            const sheetNameMap = {
-                'profile': 'Profile',
-                'experience': 'Experience',
-                'certifications': 'Certifications',
-                'project': 'Project'
-            };
-            loadSheetData(sheetNameMap[sheetName]);
-        });
-    });
+    initializeDashboard();
 });
 </script>
 {% endblock %}
