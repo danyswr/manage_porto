@@ -1,0 +1,228 @@
+// Tambahkan fungsi ini ke kode.gs Anda
+
+function doGet(e) {
+  return handleRequest(e);
+}
+
+function doPost(e) {
+  return handleRequest(e);
+}
+
+function handleRequest(e) {
+  try {
+    // Set CORS headers
+    var output = ContentService.createTextOutput();
+    output.setMimeType(ContentService.MimeType.JSON);
+    
+    var params = e.parameter;
+    var sheet = params.sheet;
+    var action = params.action || 'read';
+    
+    var result;
+    
+    switch(sheet) {
+      case 'Profile':
+        result = crudProfile(action, params);
+        break;
+      case 'Experience':
+        result = crudExperience(action, params);
+        break;
+      case 'Certifications':
+        result = crudCertifications(action, params);
+        break;
+      case 'Project':
+        result = crudProject(action, params);
+        break;
+      default:
+        result = {error: "Invalid sheet name. Available sheets: Profile, Experience, Certifications, Project"};
+    }
+    
+    return output.setContent(JSON.stringify(result));
+    
+  } catch (error) {
+    return ContentService
+      .createTextOutput(JSON.stringify({error: error.toString()}))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+// Fungsi untuk mendapatkan daftar sheet yang tersedia
+function getAvailableSheets() {
+  try {
+    var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    var sheets = spreadsheet.getSheets();
+    var sheetNames = [];
+    
+    sheets.forEach(function(sheet) {
+      var name = sheet.getName();
+      if (['Profile', 'Experience', 'Certifications', 'Project'].includes(name)) {
+        sheetNames.push(name);
+      }
+    });
+    
+    return sheetNames;
+  } catch (error) {
+    return [];
+  }
+}
+
+// Sisanya tetap sama seperti kode yang sudah ada...
+// (Fungsi crudProfile, crudExperience, crudCertifications, crudProject tetap sama)
+
+
+// Fungsi untuk menginisialisasi spreadsheet dan sheet
+function initialize() {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  var sheets = ['Profile', 'Experience', 'Certifications', 'Project'];
+  
+  sheets.forEach(function(sheetName) {
+    if (!spreadsheet.getSheetByName(sheetName)) {
+      spreadsheet.insertSheet(sheetName);
+    }
+  });
+}
+
+// Fungsi CRUD untuk Sheet "Profile"
+function crudProfile(action, data) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Profile');
+  if (!sheet) return "Sheet not found";
+  
+  switch (action.toLowerCase()) {
+    case 'create':
+      sheet.appendRow([
+        data.nama_lengkap, data.profesi, data.Deskripsi, data.Foto_Profil_URL,
+        data.Email, data.Nomor_Telepon, data.Lokasi, data.Link_LinkedIn, data.Link_GitHub
+      ]);
+      return "Data created successfully";
+    case 'read':
+      var dataRange = sheet.getDataRange().getValues();
+      return dataRange;
+    case 'update':
+      var row = data.row;
+      sheet.getRange(row, 1, 1, 9).setValues([
+        [data.nama_lengkap, data.profesi, data.Deskripsi, data.Foto_Profil_URL,
+         data.Email, data.Nomor_Telepon, data.Lokasi, data.Link_LinkedIn, data.Link_GitHub]
+      ]);
+      return "Data updated successfully";
+    case 'delete':
+      sheet.deleteRow(data.row);
+      return "Data deleted successfully";
+    default:
+      return "Invalid action";
+  }
+}
+
+// Fungsi CRUD untuk Sheet "Experience"
+function crudExperience(action, data) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Experience');
+  if (!sheet) return "Sheet not found";
+  
+  switch (action.toLowerCase()) {
+    case 'create':
+      sheet.appendRow([
+        data.ID_pengalaman, data.Posisi, data.Tanggal_Mulai, data.Tanggal_Selesai, data.Deskripsi
+      ]);
+      return "Data created successfully";
+    case 'read':
+      var dataRange = sheet.getDataRange().getValues();
+      return dataRange;
+    case 'update':
+      var row = data.row;
+      sheet.getRange(row, 1, 1, 5).setValues([
+        [data.ID_pengalaman, data.Posisi, data.Tanggal_Mulai, data.Tanggal_Selesai, data.Deskripsi]
+      ]);
+      return "Data updated successfully";
+    case 'delete':
+      sheet.deleteRow(data.row);
+      return "Data deleted successfully";
+    default:
+      return "Invalid action";
+  }
+}
+
+// Fungsi CRUD untuk Sheet "Certifications"
+function crudCertifications(action, data) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Certifications');
+  if (!sheet) return "Sheet not found";
+  
+  switch (action.toLowerCase()) {
+    case 'create':
+      sheet.appendRow([
+        data.ID_Sertifikasi, data.Nama_Sertifikasi, data.Tanggal_Diterbitkan,
+        data.Gambar_Sertifikasi_URL, data.Deskripsi
+      ]);
+      return "Data created successfully";
+    case 'read':
+      var dataRange = sheet.getDataRange().getValues();
+      return dataRange;
+    case 'update':
+      var row = data.row;
+      sheet.getRange(row, 1, 1, 5).setValues([
+        [data.ID_Sertifikasi, data.Nama_Sertifikasi, data.Tanggal_Diterbitkan,
+         data.Gambar_Sertifikasi_URL, data.Deskripsi]
+      ]);
+      return "Data updated successfully";
+    case 'delete':
+      sheet.deleteRow(data.row);
+      return "Data deleted successfully";
+    default:
+      return "Invalid action";
+  }
+}
+
+// Fungsi CRUD untuk Sheet "Project"
+function crudProject(action, data) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Project');
+  if (!sheet) return "Sheet not found";
+  
+  switch (action.toLowerCase()) {
+    case 'create':
+      sheet.appendRow([
+        data.ID_project, data.Nama_Proyek, data.Deskripsi, data.Skill, data.Link, data.Gambar_Proyek_URL
+      ]);
+      return "Data created successfully";
+    case 'read':
+      var dataRange = sheet.getDataRange().getValues();
+      return dataRange;
+    case 'update':
+      var row = data.row;
+      sheet.getRange(row, 1, 1, 6).setValues([
+        [data.ID_project, data.Nama_Proyek, data.Deskripsi, data.Skill, data.Link, data.Gambar_Proyek_URL]
+      ]);
+      return "Data updated successfully";
+    case 'delete':
+      sheet.deleteRow(data.row);
+      return "Data deleted successfully";
+    default:
+      return "Invalid action";
+  }
+}
+
+// Fungsi untuk mengunggah gambar ke Google Drive dan mendapatkan URL
+function uploadImageToDrive(fileData) {
+  var folderId = "1Xm4n-obdqcyIXTw7EMSwqoFEvEf5G0lE"; // ID folder Google Drive
+  var folder = DriveApp.getFolderById(folderId);
+  var blob = Utilities.newBlob(fileData, "image/jpeg", "image.jpg");
+  var file = folder.createFile(blob);
+  return file.getUrl();
+}
+
+// Contoh penggunaan (jalankan dari skrip atau tambahkan ke UI)
+function testCRUD() {
+  // Contoh Create untuk Profile
+  var profileData = {
+    nama_lengkap: "John Doe",
+    profesi: "Developer",
+    Deskripsi: "Web Developer",
+    Foto_Profil_URL: "https://example.com/photo.jpg",
+    Email: "john@example.com",
+    Nomor_Telepon: "08123456789",
+    Lokasi: "Jakarta",
+    Link_LinkedIn: "https://linkedin.com/in/johndoe",
+    Link_GitHub: "https://github.com/johndoe"
+  };
+  Logger.log(crudProfile("create", profileData));
+  
+  // Contoh Read untuk Profile
+  Logger.log(crudProfile("read", null));
+}
