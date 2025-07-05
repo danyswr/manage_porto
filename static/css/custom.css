@@ -1,0 +1,153 @@
+/* Custom styles for the Google Sheets Manager */
+
+/* Loading spinner customization */
+.spinner-border {
+    color: var(--bs-primary);
+}
+
+/* Table improvements */
+.table-responsive {
+    border-radius: 0.375rem;
+    overflow: hidden;
+}
+
+.table th {
+    border-top: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: 0.5px;
+}
+
+/* Modal improvements */
+.modal-header {
+    border-bottom: 1px solid var(--bs-border-color);
+}
+
+.modal-footer {
+    border-top: 1px solid var(--bs-border-color);
+}
+
+/* Form improvements */
+.form-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.form-control:focus {
+    border-color: var(--bs-primary);
+    box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary-rgb), 0.25);
+}
+
+/* Alert positioning */
+#alertContainer {
+    max-width: 400px;
+}
+
+/* Navigation tabs */
+.nav-tabs .nav-link {
+    border: 1px solid transparent;
+    border-radius: 0.375rem 0.375rem 0 0;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: var(--bs-body-bg);
+    border-color: var(--bs-border-color);
+    border-bottom-color: var(--bs-body-bg);
+}
+
+/* Card improvements */
+.card {
+    border: 1px solid var(--bs-border-color);
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.card-header {
+    background-color: var(--bs-secondary-bg);
+    border-bottom: 1px solid var(--bs-border-color);
+}
+
+/* Button improvements */
+.btn-outline-primary:hover {
+    color: var(--bs-white);
+}
+
+.btn-outline-danger:hover {
+    color: var(--bs-white);
+}
+
+/* Image thumbnails */
+.table img {
+    border: 1px solid var(--bs-border-color);
+    transition: transform 0.2s ease;
+}
+
+.table img:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+    .card-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .card-header .btn {
+        margin-top: 0.5rem;
+    }
+    
+    .table-responsive {
+        font-size: 0.875rem;
+    }
+    
+    .modal-dialog {
+        margin: 0.5rem;
+    }
+}
+
+/* Dark theme specific improvements */
+[data-bs-theme="dark"] .table-striped > tbody > tr:nth-of-type(odd) > td {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+[data-bs-theme="dark"] .table-hover > tbody > tr:hover > td {
+    background-color: rgba(255, 255, 255, 0.075);
+}
+
+/* File input styling */
+.form-control[type="file"] {
+    padding: 0.375rem 0.75rem;
+}
+
+.form-text {
+    font-size: 0.875em;
+    color: var(--bs-secondary-color);
+}
+
+/* Action buttons spacing */
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+/* Loading state */
+.table-loading {
+    text-align: center;
+    padding: 2rem;
+    color: var(--bs-secondary-color);
+}
+
+/* Empty state */
+.alert-info {
+    border-left: 4px solid var(--bs-info);
+}
+
+.alert-danger {
+    border-left: 4px solid var(--bs-danger);
+}
+
+.alert-success {
+    border-left: 4px solid var(--bs-success);
+}
